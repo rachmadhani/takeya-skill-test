@@ -11,7 +11,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
+    
+    Route::resource('posts', App\Http\Controllers\Post\PostController::class)->except(['index', 'show']);
 });
+
+Route::resource('posts', App\Http\Controllers\Post\PostController::class)->only(['index', 'show']);
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';
+
